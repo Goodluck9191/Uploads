@@ -1,6 +1,7 @@
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useAuth } from "../context/AuthContext";
 
 type FormValues = {
 	username: string;
@@ -8,8 +9,11 @@ type FormValues = {
 	password: string;
 };
 
+
 const AuthPage = () => {
 	const [signInMode, setSignInMode] = useState<boolean>(true);
+	const navigate = useNavigate()
+	const { signIn, signUp } = useAuth()
 
 	const {
 		register,
@@ -18,13 +22,20 @@ const AuthPage = () => {
 		formState: { errors },
 	} = useForm<FormValues>();
 
-	const onSubmit = (data: FormValues) => {
+	const onSubmit = async(data: FormValues) => {
 		if (signInMode) {
-			alert(`hello ${data.email} and ${data.password}`);
+			const success = await signIn(data.email, data.password)
+
+			if(success) {
+				navigate('/')
+			} else {
+				alert('fail to login')
+			}
+			
 		} else {
-			alert(
-				`hello ${data.email} and ${data.password} and ${data.username}`,
-			);
+			await signUp(data.username, data.email, data.password)
+			navigate('/')
+			
 		}
 
 		reset();
