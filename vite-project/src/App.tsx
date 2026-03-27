@@ -1,10 +1,15 @@
 
-import React from 'react'
+import { Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
 
-const App = () => {
-  return (
-    <div className='h-5 bg-amber-200'>App</div>
-  )
+
+
+export default function App() {
+	return (
+		<div className="hero">
+
+      <HomePage />
+
+		</div>
+	);
 }
-
-export default App
