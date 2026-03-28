@@ -1,10 +1,14 @@
 
 import {Box} from "lucide-react";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 
 const Navbar = () => {
-    const isSignedIn = true
-    const username = 'gooodluck'
+
+    const {user, signOut} = useAuth()
+
+    const navigate = useNavigate()
 
 
     return (
@@ -30,15 +34,15 @@ const Navbar = () => {
                 </div>
 
                 <div className={'actions'}>
-                    {isSignedIn ? (
+                    {user ? (
                         <>
-                            <span className={'greeting'}>{username ?`Hi, ${username}`: 'Signed in'}</span>
-                            <button  className={'btn cta'}>Log Out</button>
+                            <span className={'greeting'}>{user.username ?`Hi, ${user.username}`: 'Signed in'}</span>
+                            <button  className={'btn cta'} onClick={signOut}>Log Out</button>
                         </>
 
                     ) : (
                         <>
-                            <button  >
+                            <button className="btn cta" onClick={() => navigate('/auth')} >
                                 Log In
                             </button>
 
