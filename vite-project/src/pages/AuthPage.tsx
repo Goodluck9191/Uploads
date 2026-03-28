@@ -9,11 +9,10 @@ type FormValues = {
 	password: string;
 };
 
-
 const AuthPage = () => {
 	const [signInMode, setSignInMode] = useState<boolean>(true);
-	const navigate = useNavigate()
-	const { signIn, signUp } = useAuth()
+	const navigate = useNavigate();
+	const { signIn, signUp } = useAuth();
 
 	const {
 		register,
@@ -22,20 +21,26 @@ const AuthPage = () => {
 		formState: { errors },
 	} = useForm<FormValues>();
 
-	const onSubmit = async(data: FormValues) => {
+	const onSubmit = async (data: FormValues) => {
 		if (signInMode) {
-			const success = await signIn(data.email, data.password)
+			const success = await signIn(data.email, data.password);
 
-			if(success) {
-				navigate('/')
+			if (success) {
+				navigate("/");
 			} else {
-				alert('fail to login')
+				alert("fail to login");
 			}
-			
 		} else {
-			await signUp(data.username, data.email, data.password)
-			navigate('/')
-			
+			const success = await signUp(
+				data.username,
+				data.email,
+				data.password,
+			);
+			if (success) {
+				navigate("/");
+			} else {
+				return;
+			}
 		}
 
 		reset();
@@ -191,7 +196,7 @@ const AuthPage = () => {
 											</span>
 										</div>
 										<div className={"actions mt-3"}>
-											<button className="demo font-semibold p-3 cursor-pointer">
+											<button  className="demo font-semibold p-3 cursor-pointer">
 												Google
 											</button>
 											<button className="demo font-semibold p-3 cursor-pointer">

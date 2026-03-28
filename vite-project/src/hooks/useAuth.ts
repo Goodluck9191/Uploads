@@ -2,49 +2,52 @@ import { useState } from "react";
 import { createUser, getUsers } from "../services/api";
 
 export function useAuthLogic() {
-    const [user, setUser] = useState(()=> {
-        const stored = localStorage.getItem("users")
-        return stored ? JSON.parse(stored) : null
-    })
+	const [user, setUser] = useState(() => {
+		const stored = localStorage.getItem("users");
+		return stored ? JSON.parse(stored) : null;
+	});
 
-    const signUp = async(username:string, email:string, password:string) => {
+	const signUp = async (
+		username: string,
+		email: string,
+		password: string,
+	): Promise<boolean> => {
+		try {
+			const users = await getUsers();
+			const exists = users.some((u) => u.email === email);
 
-        const users = await getUsers()
+			if (exists) {
+				return false;
+			}
+			const newUser = await createUser({ username, email, password });
+			setUser(newUser);
+			localStorage.setItem("users", JSON.stringify(newUser));
+			return true;
+		} catch (error) {
+			console.error("Sign up failed:", error);
+			return false;
+		}
+	};
 
-        const exists = users.some(u => u.email == email)
+	const signIn = async (email: string, password: string) => {
+		const users = await getUsers();
 
-        if (exists) {
-            alert(`The email ${email} is already exists please use another or try to login`)
-            return
-        }
+		const foundUser = users.find(
+			(u) => u.email == email && u.password == password,
+		);
 
-        const newUser = await createUser({username, email, password})
+		if (foundUser) {
+			setUser(foundUser);
+			localStorage.setItem("users", JSON.stringify(foundUser));
+			return true;
+		}
 
-        setUser(newUser)
-        localStorage.setItem("users", JSON.stringify(newUser))
+		return false;
+	};
 
-    }
-
-    const signIn = async(email:string, password:string) => {
-
-        const users = await getUsers()
-
-        const foundUser = users.find(u => u.email == email && u.password == password)
-
-        if(foundUser) {
-            setUser(foundUser)
-            localStorage.setItem("users", JSON.stringify(foundUser))
-            return true
-        }
-
-        return false
-
-    }
-
-    const signOut = () => {
-        setUser(null)
-        localStorage.removeItem("users")
-    }
-
-    return {user, signUp, signIn, signOut }
+	const signOut = () => {
+		setUser(null);
+		localStorage.removeItem("users");
+	};
+    return { user, signUp, signIn, signOut };
 }
