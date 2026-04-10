@@ -5,8 +5,8 @@ import { AuthProvider } from "./context/AuthProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
 import AssetsPage from "./pages/AssetsPage";
-import Navbar from "./components/Navbar";
-import Leftbar from "./components/Leftbar";
+
+import AddAssetPage from "./pages/AddAssetPage";
 
 export default function App() {
 	return (
@@ -29,6 +29,15 @@ export default function App() {
 						element={
 							<ProtectedRoute>
 								<AssetsPage />
+
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="/addAsset"
+						element={
+							<ProtectedRoute>
+								<AddAssetPage />
 
 							</ProtectedRoute>
 						}
