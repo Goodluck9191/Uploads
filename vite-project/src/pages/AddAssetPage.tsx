@@ -4,13 +4,14 @@ import Leftbar from "../components/Leftbar";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useForm } from "react-hook-form";
+import { useAssetLogic } from "../hooks/useAsset";
 
 type FormValues = {
 	assetName: string;
 	assetTag: string;
 	category: string;
 	location: string;
-	assignedTo?: string;
+	assignedTo: string;
 	purchaseDate?: string;
 	serialNumber?: string;
 	warantUntil?: string;
@@ -19,6 +20,8 @@ type FormValues = {
 };
 
 const AddAssetPage = () => {
+
+	const { AddAsset } = useAssetLogic()
 	const {
 		register,
 		handleSubmit,
@@ -27,7 +30,17 @@ const AddAssetPage = () => {
 	} = useForm<FormValues>();
 
 	const onSubmit = async (data: FormValues) => {
-		alert(`hello welcome`);
+		try {
+			const success = await AddAsset(data.assetName, data.assetTag, data.assignedTo, data.category, data.description, data.location, data.purchaseDate, data.serialNumber, data.supplier, data.warantUntil)
+
+			if (success) {
+				alert('asset created')
+			} else {
+				alert('asset not created please try again')
+			}
+		} catch (error) {
+			console.log(error)
+		}
 
 		reset();
 	};

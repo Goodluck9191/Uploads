@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Leftbar from "../components/Leftbar";
 
 const AssetsPage = () => {
+	
 	return (
 		<div className="flex">
 			<Navbar />
