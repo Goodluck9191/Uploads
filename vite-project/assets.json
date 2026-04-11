@@ -1,19 +1,30 @@
 {
   "assets": [
     {
-      "assetName": "2026-04-10",
-      "assetTag": "001",
-      "category": "Goodluck",
-      "location": "IT equipment",
-      "description": "RAM 6",
+      "assetName": "Lenovo",
+      "assetTag": "IT01",
       "assignedTo": "lab1",
+      "category": "Goodluck",
+      "description": "RAM16 SSD256",
+      "location": "IT equipment",
+      "purchaseDate": "2026-04-11",
       "serialNumber": "004s",
-      "warantUntil": "Dell Tech",
-      "supplier": "",
-      "id": "4ktBSpjLI8Q"
+      "warantUntil": "lENOVO TECH",
+      "supplier": "2026-04-30",
+      "id": "E5Yay6aEE8k"
     },
     {
-      "id": "qrYSczEVG8s"
+      "assetName": "Dell laptop",
+      "assetTag": "IT01",
+      "assignedTo": "Goodluck",
+      "category": "IT equipment",
+      "description": "RAM16 SSD256",
+      "location": "lab2",
+      "purchaseDate": "2026-04-11",
+      "serialNumber": "001",
+      "warantUntil": "Dell Tech",
+      "supplier": "2026-04-29",
+      "id": "ds2tN3nEF9w"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -1,33 +1,31 @@
 import React from "react";
-import { createAsset } from "../services/api";
+import { createAsset, getAsset, type Asset } from "../services/api";
 
 export function useAssetLogic() {
 	const AddAsset = async (
 		assetName: string,
 		assetTag: string,
-		category: string,
-		location: string,
-        description: string,
 		assignedTo: string,
+		category: string,
+		description: string,
+		location: string,
 		purchaseDate?: string,
 		serialNumber?: string,
 		warantUntil?: string,
 		supplier?: string,
-		
 	): Promise<boolean> => {
 		try {
 			const newAsset = await createAsset({
 				assetName,
 				assetTag,
+				assignedTo,
 				category,
+				description,
 				location,
-                description,
-                assignedTo,
 				purchaseDate,
 				serialNumber,
 				warantUntil,
 				supplier,
-				
 			});
 
 			return true;
@@ -36,6 +34,14 @@ export function useAssetLogic() {
 			return false;
 		}
 	};
+	const AllAsset = async () => {
+		try {
+			return await getAsset();
+		} catch (error) {
+			console.error("Sign up failed:", error);
+			return [];
+		}
+	};
 
-    return {AddAsset}
+	return { AddAsset, AllAsset };
 }

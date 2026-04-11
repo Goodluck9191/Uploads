@@ -51,3 +51,11 @@ export const createAsset = async (asset: Asset): Promise<Asset> => {
 	}
 	return res.json();
 };
+
+export const getAsset = async (): Promise<Asset[]> => {
+	const res = await fetch(`${BASE_URL2}/assets`)
+	if (!res.ok) {
+		throw new Error(`Failed to fetch the assets: ${res.status}`)
+	}
+	 return res.json()
+}

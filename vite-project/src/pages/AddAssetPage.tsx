@@ -9,14 +9,15 @@ import { useAssetLogic } from "../hooks/useAsset";
 type FormValues = {
 	assetName: string;
 	assetTag: string;
-	category: string;
+	assignedTo: string,
 	location: string;
-	assignedTo: string;
+	description: string;
+	category: string;
 	purchaseDate?: string;
 	serialNumber?: string;
 	warantUntil?: string;
 	supplier?: string;
-	description: string;
+	
 };
 
 const AddAssetPage = () => {
@@ -60,7 +61,7 @@ const AddAssetPage = () => {
 						<form onSubmit={handleSubmit(onSubmit)}>
 							<div className="grid grid-cols-2 gap-6">
 								<div className="flex flex-col gap-3">
-									<label htmlFor="">Asset Name</label>
+									<label htmlFor="assetName">Asset Name</label>
 									<input
 										type="text"
 										placeholder="eg.Dell Laptop"
@@ -84,7 +85,7 @@ const AddAssetPage = () => {
 									)}
 								</div>
 								<div className="flex flex-col gap-3">
-									<label htmlFor="">Location</label>
+									<label htmlFor="location">Location</label>
 									<input
 										type="text"
 										placeholder="eg.Computer lab"
@@ -108,7 +109,7 @@ const AddAssetPage = () => {
 									)}
 								</div>
 								<div className="flex flex-col gap-3">
-									<label htmlFor="">Asset Tag</label>
+									<label htmlFor="assetTag">Asset Tag</label>
 									<input
 										type="text"
 										placeholder="eg.IT.12"
@@ -132,7 +133,7 @@ const AddAssetPage = () => {
 									)}
 								</div>
 								<div className="flex flex-col gap-3">
-									<label htmlFor="">Assigned To</label>
+									<label htmlFor="assignedTo">Assigned To</label>
 									<input
 										type="text"
 										placeholder="eg.Goodluck"
@@ -156,7 +157,7 @@ const AddAssetPage = () => {
 								</div>
 
 								<div className="flex flex-col gap-3">
-									<label htmlFor="">Category</label>
+									<label htmlFor="category">Category</label>
 									<input
 										type="text"
 										placeholder="eg.IT Equpment"
@@ -181,25 +182,25 @@ const AddAssetPage = () => {
 									)}
 								</div>
 								<div className="flex flex-col gap-3">
-									<label htmlFor="">Purchase Date</label>
+									<label htmlFor="purchaseDate">Purchase Date</label>
 									<input
 										type="date"
 										placeholder="eg.Dell Laptop"
-										{...register("assetName", {
+										{...register("purchaseDate", {
 											required:
 												"Purchase date is required",
 										})}
 										className="border p-3 rounded "
 									/>
-									{errors.assetName && (
-										<span>{errors.assetName.message}</span>
+									{errors.purchaseDate && (
+										<span>{errors.purchaseDate.message}</span>
 									)}
 								</div>
 							</div>
 							<div className="flex flex-col gap-4 py-7">
 								<h1>Additional Details</h1>
 								<div className="flex flex-col gap-3">
-									<label htmlFor="">Serial Number</label>
+									<label htmlFor="serialNumber">Serial Number</label>
 									<input
 										type="text"
 										placeholder="eg.DLS-1123"
@@ -224,7 +225,7 @@ const AddAssetPage = () => {
 									)}
 								</div>
 								<div className="flex flex-col gap-3">
-									<label htmlFor="">Warant Until</label>
+									<label htmlFor="warantUntil">Warant Until</label>
 									<input
 										type="date"
 										placeholder="eg.Dell Laptop"
@@ -238,7 +239,7 @@ const AddAssetPage = () => {
 									)}
 								</div>
 								<div className="flex flex-col gap-3">
-									<label htmlFor="">Supplier</label>
+									<label htmlFor="supplier">Supplier</label>
 									<input
 										type="text"
 										placeholder="eg.Dell Tech"
