@@ -20,17 +20,10 @@ const Navbar = () => {
                         <Box className={'logo'}/>
 
                         <span className={'name'}>
-                            Roomify
+                            Asset Management
                         </span>
                     </div>
 
-                    <ul className={'links'}>
-                        <a href="#">Product</a>
-                        <a href="#">Pricing</a>
-                        <a href="#">Community</a>
-                        <a href="#">Enterprise</a>
-                        <a href="#">Another</a>
-                    </ul>
                 </div>
 
                 <div className={'actions'}>
